@@ -3,7 +3,6 @@ real_news_file = '/data/real_news.pickle'
 
 fake_news = [
     'http://abcnews.com.co',
-    'http://cnn-trending.com',
     'http://drudgereport.com.co',
     'http://usatoday.com.co',
     'http://infowars.com',
@@ -20,5 +19,10 @@ real_news = [
     'http://foxnews.com',
     'http://cnbc.com',
     'http://msnbc.com',
-    'http://reuters.com'
+    'http://reuters.com',
+    'http://bloomberg.com',
+    'http://cbs.com',
+    'http://nytimes.com',
+    'http://wsj.com',
+    'http://bbc.com'
 ]

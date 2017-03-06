@@ -30,25 +30,33 @@ class Scraper():
         except:
             self.real_news_examples = []
 
+    def save_examples(self):
+        with open(self.fake_news_file,'wb') as f:
+            pickle.dump(self.fake_news_examples, f)
+        with open(self.real_news_file,'wb') as f:
+            pickle.dump(self.real_news_examples, f)
+
     def scrape_examples(self):
+        print('Loading examples ..')
+        self.load_examples()
+        print('Scraping fake news ...')
         self.build_fake_news()
+        print('Scraping real news ...')
         self.build_real_news()
+        print('Saving examples')
+        self.save_examples()
 
     def build_fake_news(self):
         for url in self.fake_news:
             fake_docs = self.build_articles(url)
             for doc in fake_docs:
                 self.fake_news_examples.append(doc)
-        with open(self.fake_news_file,'wb') as f:
-            pickle.dump(self.fake_news_examples, f)
 
     def build_real_news(self):
         for url in self.real_news:
             real_docs = self.build_articles(url)
             for doc in real_docs:
                 self.real_news_examples.append(doc)
-        with open(self.real_news_file,'wb') as f:
-            pickle.dump(self.real_news_examples, f)
 
     def build_articles(self, url):
         """
@@ -76,4 +84,6 @@ class Scraper():
             articles.append(doc)
         return articles
 
-
+if __name__ == '__main__':
+    scraper = Scraper()
+    scraper.scrape_examples()
