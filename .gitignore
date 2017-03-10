@@ -1,4 +1,7 @@
 batch/*
 dist/*
 *.pyc
-InfiniteJest.egg-info/*
+fake_news.egg-info/*
+*.pickle
+*.tar.gz
+*.log
