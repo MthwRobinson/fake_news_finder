@@ -1,2 +1,4 @@
 newspaper
 pytz
+sklearn
+pandas
