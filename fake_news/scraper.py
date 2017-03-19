@@ -1,10 +1,16 @@
 import conf
 import pytz
 import datetime
-import newspaper
 import os
-import cPickle as pickle
-from newspaper import Source, Article
+import sys
+if sys.version_info >= (3,0):
+    import newspaper3k as newspaper
+    from newspaper3k import Source, Article
+    import pickle
+else:
+    import newspaper
+    import cPickle as pickle
+    from newspaper import Source, Article
 
 class Scraper():
     def __init__(self):
