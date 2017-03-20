@@ -1,16 +1,16 @@
 import conf
 import pytz
 import datetime
-import os
-import sys
+import os, sys
+from copy import deepcopy
 if sys.version_info >= (3,0):
+    import pickle
     import newspaper3k as newspaper
     from newspaper3k import Source, Article
-    import pickle
 else:
-    import newspaper
     import cPickle as pickle
     from newspaper import Source, Article
+    import newspaper
 
 class Scraper():
     def __init__(self):
@@ -57,12 +57,17 @@ class Scraper():
             fake_docs = self.build_articles(url)
             for doc in fake_docs:
                 self.fake_news_examples.append(doc)
+        print('Cleaning fake news')
+        cleaned = self.clean_examples(self.fake_news_examples)
+        self.fake_news_examples = cleaned
 
     def build_real_news(self):
         for url in self.real_news:
             real_docs = self.build_articles(url)
             for doc in real_docs:
                 self.real_news_examples.append(doc)
+        cleaned = self.clean_examples(self.fake_news_examples)
+        self.fake_news_examples = cleaned
 
     def build_articles(self, url):
         """
@@ -89,6 +94,50 @@ class Scraper():
             doc['html'] = article.article_html
             articles.append(doc)
         return articles
+
+    def clean_articles(self, articles):
+        good_articles = []
+        titles = []
+        for i, article_ in enumerate(articles):
+            if i%1000 == 0:
+                print(('%s articles completed')%(i))
+            article = deepcopy(article_) 
+            # Get rid of common tag lines
+            blurbs = [
+                "There's a war on for your mind!",
+                "Alex Jones' Infowars:",
+                "NaturalNews.com",
+                "2013 NaturalNews.com"
+            ]
+            for blurb in blurbs:
+                article['content'] = article['content'].replace(blurb,'')
+                article['title'] = article['title'].replace(blurb,'')
+
+            # Skip bad articles
+            skip = False
+            if len(article['content']) == 0:
+                skip = True
+            if 'page not found' in article['content'].lower():
+                skip = True
+            if 'page not found' in article['title'].lower():
+                skip = True
+            if '404' in article['content']:
+                skip = True
+            if 'reuters' in article['source'].lower():
+                skip = True
+            if article['title'] in titles:
+                skip = True
+            
+            # Keep the good articles! :)
+            if not skip:
+                good_articles.append(article)
+                titles.append(article['title'])
+
+        return good_articles
+
+
+                
+
 
 if __name__ == '__main__':
     scraper = Scraper()

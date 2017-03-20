@@ -33,7 +33,7 @@ def scrape(fake, real):
     diff = end - start
     seconds = diff.seconds
     minutes = seconds/60
-    print(('Done! Scraping took %s seconds')%(minutes))
+    print(('Done! Scraping took %s minutes')%(minutes))
 
 main.add_command(scrape)
 
