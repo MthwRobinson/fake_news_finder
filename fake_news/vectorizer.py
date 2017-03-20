@@ -3,10 +3,9 @@ import pickle
 import pandas as pd
 import os
 import conf
+from unidecode import unidecode
+import random
 
-VECTORIZERS = [
-    TfidfVectorizer(stop_words='english', min_df=5, max_df=.5)
-]
 
 class Vectorizer():
     """
@@ -14,7 +13,7 @@ class Vectorizer():
     with a fit_transform method that converts the test to 
     a matrix
     """
-    def __init__(self, vectorizer, name = None, test = False):
+    def __init__(self, name = None, sample = True):
         self.dir = os.path.dirname(os.path.realpath(__file__))
         self.fake_news_file = self.dir + conf.fake_news_file
         self.real_news_file = self.dir + conf.real_news_file
@@ -24,9 +23,15 @@ class Vectorizer():
 
         self.load_examples()
 
-        self.vectorizer = vectorizer
+
+        tfidf = TfidfVectorizer(stop_words='english', min_df=5, max_df=.5)
+        self.vectorizers = {
+            'tfidf' : tfidf 
+        }
+
+        self.vectorizer = self.vectorizers[name]
         self.name = name
-        self.test = test
+        self.sample = sample
 
     def load_examples(self):
         try:
@@ -42,14 +47,19 @@ class Vectorizer():
             self.real_news_examples = []
 
     def build_model(self):
-        # Build corpus
+        # Build corpus. Sample from the real news because it's
+        # much larger
         print('Building corpus ...')
         fake_corpus = [x['content'] for x in self.fake_news_examples]
         real_corpus = [x['content'] for x in self.real_news_examples]
-        if self.test:
-            fake_corpus = fake_corpus[:500]
-            real_corpus = real_corpus[:500]
-
+        if self.sample:
+            num_fake = len(fake_corpus)
+            num_real = len(real_corpus)
+            idx = random.sample(range(1,num_real), num_fake)
+            real_sample = []
+            for i in idx:
+                real_sample.append(real_corpus[i])
+            real_corpus = [x for x in real_sample]
 
         # Build model
         print('Building model ...')
@@ -62,7 +72,7 @@ class Vectorizer():
         fake_df = pd.DataFrame(fake_model.toarray())
         fake_df['y'] = 1
         real_df = pd.DataFrame(real_model.toarray())
-        real_df['y'] = 1
+        real_df['y'] = 0
         full_df = pd.concat([fake_df, real_df])
         self.model_df = full_df      
 

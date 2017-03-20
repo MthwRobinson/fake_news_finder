@@ -1,5 +1,6 @@
 import click
 from fake_news.scraper import Scraper
+from fake_news.vectorizer import Vectorizer
 from datetime import datetime
 
 @click.group()
@@ -34,8 +35,24 @@ def scrape(fake, real):
     seconds = diff.seconds
     minutes = seconds/60
     print(('Done! Scraping took %s minutes')%(minutes))
-
 main.add_command(scrape)
+
+@click.command('vectorize', help='Converts articles into vectorized dataframe')
+@click.option('--name', type=click.STRING, help='Choose the type of vectorizer')
+@click.option('--sample', is_flag=True, help='Samples from real news if true')
+def vectorize(name, sample):
+    start = datetime.utcnow()
+    print('Loading vectorizer ...')
+    vectorizer = Vectorizer(name = name, sample = sample)
+    vectorizer.build_model()
+    vectorizer.save_model()
+    end = datetime.utcnow()
+    diff = end - start
+    seconds = diff.seconds
+    minutes = seconds/60
+    print(('Done! Vector representation built in %s minutes')%(minutes))
+main.add_command(vectorize)
+
 
 if __name__ == '__main__':
     main()

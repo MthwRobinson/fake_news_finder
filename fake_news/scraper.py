@@ -3,6 +3,7 @@ import pytz
 import datetime
 import os, sys
 from copy import deepcopy
+from unidecode import unidecode
 if sys.version_info >= (3,0):
     import pickle
     import newspaper3k as newspaper
@@ -112,6 +113,8 @@ class Scraper():
             for blurb in blurbs:
                 article['content'] = article['content'].replace(blurb,'')
                 article['title'] = article['title'].replace(blurb,'')
+            article['content'] = str(unidecode(article['content']))
+            article['title'] = str(unidecode(article['title']))
 
             # Skip bad articles
             skip = False
