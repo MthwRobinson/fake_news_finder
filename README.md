@@ -1,6 +1,7 @@
 # Fake News Finder
-:panda\_face: A machine learning model that takes in news stories as input, and classifies them as either real or fake. By Team Panda :panda\_face:
-           :panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face:
+A machine learning model that takes in news stories as input, and classifies them as either real or fake.
+By Team Panda
+:panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face::panda\_face:
 
 ## Installation
 ```
