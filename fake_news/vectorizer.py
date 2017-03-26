@@ -6,7 +6,6 @@ import conf
 from unidecode import unidecode
 import random
 
-
 class Vectorizer():
     """
     The vectorizer chosen must be an sklearn-type vectorizer
@@ -46,13 +45,15 @@ class Vectorizer():
         except:
             self.real_news_examples = []
 
-    def build_model(self):
+    def build_model(self, random_seed = 8675309):
         # Build corpus. Sample from the real news because it's
         # much larger
         print('Building corpus ...')
         fake_corpus = [x['content'] for x in self.fake_news_examples]
         real_corpus = [x['content'] for x in self.real_news_examples]
         if self.sample:
+            if random_seed:
+                random.seed(random_seed)
             num_fake = len(fake_corpus)
             num_real = len(real_corpus)
             idx = random.sample(range(1,num_real), num_fake)

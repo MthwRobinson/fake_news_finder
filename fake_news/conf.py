@@ -1,6 +1,8 @@
 fake_news_file = '/data/fake_news.pickle'
 real_news_file = '/data/real_news.pickle'
 
+matrix_folder = '/modesl/vecs/'
+
 fake_news = [
     'http://abcnews.com.co',
     'http://drudgereport.com.co',
