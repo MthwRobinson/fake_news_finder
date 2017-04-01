@@ -4,14 +4,15 @@ import datetime
 import os, sys
 from copy import deepcopy
 from unidecode import unidecode
-if sys.version_info >= (3,0):
-    import pickle
-    import newspaper3k as newspaper
-    from newspaper3k import Source, Article
-else:
-    import cPickle as pickle
-    from newspaper import Source, Article
-    import newspaper
+#if sys.version_info >= (3,0):
+#    import pickle
+#    import newspaper3k as newspaper
+#    from newspaper3k import Source, Article
+#else:
+import pickle
+#import cPickle as pickle
+from newspaper import Source, Article
+import newspaper
 
 class Scraper():
     def __init__(self):
