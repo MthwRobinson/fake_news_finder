@@ -25,5 +25,6 @@ model = Word2Vec(sentences, min_count=min_count, size=size, window=window)
 #print(model.wv.vocab)
 for i in model.wv.vocab:
 	print(model[i])
+  
 #print(model[page_list[0]])
 #print(model.batch_words)
