@@ -38,3 +38,24 @@ Or you can use the CLI
 ```bash
 fake_news vectorize --name tfidf --sample
 ```
+
+## Test a model
+The news classifier class contains methods for training and evaluating
+a model. To instantiate the news classifier class, used the following
+code
+```python
+from fake_news.classifier import NewsClassifier
+from sklearn.ensemble import RandomForestClassifier
+
+clf = RandomForestClassifier(n_estimators=70)
+nc = NewsClassifier(clf, 'tfidf')
+```
+
+The bootstrap evaluate method evaulates the performace of the model
+by testing it on n random partitions of the data set. The number
+of random splits is set by the iters parameter. It returns a vector
+of results that can be used in two sample t tests. The model can
+be evaluated using accuracy, precision, recall or fscore.
+```python
+results = nc.bootstrap_evaluate(iters = 30, metric = 'fscore', pct = =.8)
+```
