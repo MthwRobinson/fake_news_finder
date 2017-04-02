@@ -1,6 +1,7 @@
 import click
 from fake_news.scraper import Scraper
 from fake_news.vectorizer import Vectorizer
+import fake_news.conf
 from datetime import datetime
 
 @click.group()

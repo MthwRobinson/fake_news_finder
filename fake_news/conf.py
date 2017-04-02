@@ -1,3 +1,6 @@
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import MultinomialNB
+
 fake_news_file = '/data/fake_news.pickle'
 real_news_file = '/data/real_news.pickle'
 
@@ -27,4 +30,18 @@ real_news = [
     'http://nytimes.com',
     'http://wsj.com',
     'http://bbc.com'
+]
+
+model_list = [
+    {
+        'name' : 'Naive Bayes',
+        'clf' : MultinomialNB(),
+        'vec' : 'tfidf'
+
+    },
+    {
+        'name' : 'Random Forest',
+        'clf' : RandomForestClassifier(n_estimators=70),
+        'vec' : 'tfidf'
+    }
 ]

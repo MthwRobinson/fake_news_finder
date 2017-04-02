@@ -8,6 +8,7 @@ else:
     import cPickle as pickle
 import random
 import numpy as np
+from scipy.stats import ttest_ind
 
 
 class NewsClassifier():
@@ -24,16 +25,25 @@ class NewsClassifier():
         vec is a string that corresponds to a pickle file
         """
         self.dir = os.path.dirname(os.path.realpath(__file__))
-        self.clf = clf
-        vec_file = self.dir + '/models/vecs/' + vec + '.pickle'
-        with open(vec_file, 'rb') as f:
-            self.df = pickle.load(f)
+        self.set_vectorizer(vec)
+        self.set_classifier(clf)
 
-    def change_classifier(self, clf):
+    def set_classifier(self, clf):
         """
-        Swaps the classfifier. Syntactic sugar for testing
+        Sets the classifier
         """
         self.clf = clf
+
+    def set_vectorizer(self, vec):
+        """
+        Sets the vectorizer for the feature space
+        """
+        self.vec = vec
+        # Only import the model if the vectorizer has changed
+        if self.vec != vec:
+            vec_file = self.dir + '/models/vecs/' + vec + '.pickle'
+            with open(vec_file, 'rb') as f:
+                self.df = pickle.load(f)
 
     def train_test_sets(self, pct, random_seed = 21189):
         """
@@ -139,4 +149,67 @@ class NewsClassifier():
             stats = self.evaluate_model()
             results.append(stats[metric])
         return results
+
+    def compare_models(self, model_list, iters = 30, metric = 'fscore',
+            pct = .8, random_seed = None):
+        """
+        Compares the performance of different models and 
+            determines if there is a statistically
+            significant difference in their performance
+        Models are specified as follows, and entered in
+            as list
+            model = {
+                'name' : 'RandomForest',
+                'clf' : RandomForestClassifier(n_estimators=70)
+                'vec' : 'tfidf'
+            }
+        """
+        # Check to make sure all of the models have the
+        #   proper keys
+        for model in model_list:
+            bad = False
+            if 'name' not in model:
+                bad = True
+            if 'clf' not in model:
+                bad = True
+            if 'vec' not in model:
+                bad = True
+            if bad:
+                err = 'Each model must have name, clf and vec keys'
+                raise TypeError(err)
+
+        # Compute the results for each model
+        # The same random seed gets used for each model, to ensure a
+        #   that they are evaluated on the same set of data
+        for model in model_list:
+            self.set_classifier(model['clf'])
+            self.set_vectorizer(model['vec'])
+            results = self.bootstrap_evaluate(iters = iters, metric = metric,
+                    pct = pct, random_seed = random_seed)
+            model['results'] = results
+
+        # Compare the results and see if there is a statistically
+        #   significant difference in model performance
+        perf = {}
+        for model in model_list:
+            model_perf = {}
+            model_perf['results'] = model['results']
+            model_perf['mean'] = np.mean(model['results'])
+            model_perf['median'] = np.mean(model['results'])
+            model_perf['max'] = np.max(model['results'])
+            model_perf['min'] = np.min(model['results'])
+            model_perf['ttest'] = {}
+            # Perform a two sample t-test with all of the other
+            #   models to see if there is a statistically
+            #   significant difference in performance
+            for other_model in model_list:
+                if model['name'] != other_model['name']:
+                    ttest = ttest_ind(model['results'], other_model['results'])
+                    pval = ttest.pvalue
+                    model_perf['ttest'][other_model['name']] = pval
+            perf[model['name']] = model_perf
+        return perf
+
+
+
 
