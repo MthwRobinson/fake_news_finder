@@ -18,11 +18,22 @@ class NewsClassifier():
         news article examples
     """
     def __init__(self, clf, vec):
+        """
+        Instantiates the class
+        clf is an sklearn-type classfier
+        vec is a string that corresponds to a pickle file
+        """
         self.dir = os.path.dirname(os.path.realpath(__file__))
         self.clf = clf
         vec_file = self.dir + '/models/vecs/' + vec + '.pickle'
         with open(vec_file, 'rb') as f:
             self.df = pickle.load(f)
+
+    def change_classifier(self, clf):
+        """
+        Swaps the classfifier. Syntactic sugar for testing
+        """
+        self.clf = clf
 
     def train_test_sets(self, pct, random_seed = 21189):
         """
@@ -32,7 +43,7 @@ class NewsClassifier():
         if random_seed:
             random.seed(random_seed)
 
-        # Choose which indices will belong to each st
+        # Choose which indices will belong to each set
         num_articles = self.df.shape[0]
         idx = range(num_articles)
         self.df.index = idx
@@ -46,6 +57,9 @@ class NewsClassifier():
         self.test_df = self.df.iloc[test_idx]
 
     def train_model(self):
+        """ 
+        Trains the classifier model
+        """
         # Turn the training data frame into an appropriate
         # matrix / vector
         y = self.train_df['y']
@@ -56,6 +70,9 @@ class NewsClassifier():
         self.clf.fit(X,y)
 
     def predict_labels(self):
+        """
+        Predicts the labels of the test set
+        """
         # Turn the test data frame into an appropriate
         # matrix / vector
         X = self.test_df.copy()
@@ -65,6 +82,10 @@ class NewsClassifier():
         self.ypred = self.clf.predict(X)
 
     def evaluate_model(self):
+        """
+        Evaluates the effectiveness of the models according
+            to a number of metrics for classifier performance
+        """
         # Check the predictions against observed values
         y = list(self.test_df['y'])
         ypred = list(self.ypred)
@@ -96,8 +117,26 @@ class NewsClassifier():
         }
         return stats
 
+    def bootstrap_evaluate(self, iters = 30, metric = 'fscore', 
+            pct = .8, random_seed = None):
+        """
+        Evaluates the effectiveness of the model on
+            various random partitions of the data
+        Saves a vector of performance statistics that
+            can be used in a two sample t-test
+        This procedure may be expensive for large sample sizes
+        """
+        # Set the random seed
+        if random_seed:
+            random.seed(random_seed)
 
-
-
-
+        # Evaluate the model on b different random partitions
+        results = []
+        for i in range(iters):
+            self.train_test_sets(pct = pct)
+            self.train_model()
+            self.predict_labels()
+            stats = self.evaluate_model()
+            results.append(stats[metric])
+        return results
 
