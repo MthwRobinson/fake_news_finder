@@ -59,3 +59,32 @@ be evaluated using accuracy, precision, recall or fscore.
 ```python
 results = nc.bootstrap_evaluate(iters = 30, metric = 'fscore', pct = =.8)
 ```
+
+We can test a bunch of models against one another at the same time
+using the compare models method. The models are entered as a list, and
+each model is a dicitonary with the following form:
+```python
+model = {
+  'name' : 'Random Forest',
+  'clf' : RandomForestClassifier(n_estimators=70),
+  'vec' : 'tfidf'
+}
+```
+
+You can test the models inn python using the following code:
+```python
+perf = nc.compare_models(
+  model_list = model_list,
+  iters = iters,
+  metric = metric,
+  pct = pct
+  random_seed = random_seed
+)
+```
+
+Or from the CLI with the following command
+```bash
+fake_news test_models --iters 30 --metric fscore --pct .8 --random_seed 20
+```
+
+The list of models is stored in the `conf.py` file.

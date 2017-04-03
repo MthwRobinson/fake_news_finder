@@ -25,6 +25,7 @@ class NewsClassifier():
         vec is a string that corresponds to a pickle file
         """
         self.dir = os.path.dirname(os.path.realpath(__file__))
+        self.vec = None
         self.set_vectorizer(vec)
         self.set_classifier(clf)
 
@@ -38,12 +39,12 @@ class NewsClassifier():
         """
         Sets the vectorizer for the feature space
         """
-        self.vec = vec
         # Only import the model if the vectorizer has changed
         if self.vec != vec:
             vec_file = self.dir + '/models/vecs/' + vec + '.pickle'
             with open(vec_file, 'rb') as f:
                 self.df = pickle.load(f)
+        self.vec = vec
 
     def train_test_sets(self, pct, random_seed = 21189):
         """
@@ -182,6 +183,7 @@ class NewsClassifier():
         # The same random seed gets used for each model, to ensure a
         #   that they are evaluated on the same set of data
         for model in model_list:
+            print(('Now testing %s')%(model['name']))
             self.set_classifier(model['clf'])
             self.set_vectorizer(model['vec'])
             results = self.bootstrap_evaluate(iters = iters, metric = metric,

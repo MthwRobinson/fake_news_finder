@@ -1,7 +1,8 @@
 import click
 from fake_news.scraper import Scraper
 from fake_news.vectorizer import Vectorizer
-import fake_news.conf
+from fake_news.classifier import NewsClassifier
+import fake_news.conf as conf
 from datetime import datetime
 
 @click.group()
@@ -53,6 +54,52 @@ def vectorize(name, sample):
     minutes = seconds/60
     print(('Done! Vector representation built in %s minutes')%(minutes))
 main.add_command(vectorize)
+
+@click.command('test_models', help='Compares the models in the conf file')
+@click.option('--iters', default=10, help='Number of iterations')
+@click.option('--metric', default='fscore', help='Sets the comparison metric')
+@click.option('--pct', default=.8, help='Percentage of articles in trng set')
+@click.option('--random_seed', default=8675309, help='Sets the random seed')
+def test_models(iters, metric, pct, random_seed):
+    start = datetime.utcnow()
+    print('Loading news classifier ...')
+    # Instantiate the classifier
+    model_list = conf.model_list
+    first_model= model_list[0]
+    nc = NewsClassifier(clf = first_model['clf'], vec = first_model['vec'])
+
+    # Compare the models
+    perf = nc.compare_models(
+        model_list = model_list,
+        iters = iters,
+        metric = metric,
+        pct = pct,
+        random_seed = random_seed
+    )
+    models = perf.keys()
+    for model in models:
+        print('')
+        print('--------------------------------------')
+        print(model)
+        print(('Mean: %s')%(perf[model]['mean']))
+        print(('Median: %s')%(perf[model]['median']))
+        print(('Max: %s')%(perf[model]['max']))
+        print(('Min: %s')%(perf[model]['min']))
+        print('T-tests:')
+        for other_model in perf[model]['ttest']:
+            pval = perf[model]['ttest'][other_model]
+            print(('    P-val (%s): %s')%(other_model, pval))
+        print('--------------------------------------')
+
+    # See how long it took!
+    end = datetime.utcnow()
+    diff = end - start
+    seconds = diff.seconds
+    minutes = seconds/60
+    print(('Done! Models evaluated in %s minutes')%(minutes))
+main.add_command(test_models)
+
+
 
 
 if __name__ == '__main__':

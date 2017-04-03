@@ -2,3 +2,4 @@ newspaper
 pytz
 sklearn
 pandas
+scipy
