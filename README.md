@@ -71,7 +71,7 @@ model = {
 }
 ```
 
-You can test the models inn python using the following code:
+You can test the models in python using the following code:
 ```python
 perf = nc.compare_models(
   model_list = model_list,
