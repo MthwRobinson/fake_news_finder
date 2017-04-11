@@ -1,8 +1,9 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
-import pickle
+from fake_news.word2vec import Word2VecSimple
+import _pickle as pickle
 import pandas as pd
 import os
-import conf
+from fake_news import conf
 from unidecode import unidecode
 import random
 
@@ -24,8 +25,10 @@ class Vectorizer():
 
 
         tfidf = TfidfVectorizer(stop_words='english', min_df=5, max_df=.5)
+        word2vec = Word2VecSimple(min_count = 0, size = 50, window = 4, vectorization_function = "maxmin")
         self.vectorizers = {
-            'tfidf' : tfidf 
+            'tfidf' : tfidf,
+            'word2vec' : word2vec
         }
 
         self.vectorizer = self.vectorizers[name]
@@ -96,5 +99,5 @@ class Vectorizer():
                     already_used = False
             filename = model_dir + '/' + filename
         with open(filename, 'wb') as f:
-            pickle.dump(self.model_df, f)
+            pickle.dump(self.model_df, f, protocol=4)
 

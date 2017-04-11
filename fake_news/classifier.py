@@ -1,7 +1,7 @@
 from __future__ import division
 import sys, os
 from sklearn.ensemble import RandomForestClassifier
-import conf
+from fake_news import conf
 if sys.version_info >= (3,0):
     import pickle
 else:
@@ -144,6 +144,7 @@ class NewsClassifier():
         # Evaluate the model on b different random partitions
         results = []
         for i in range(iters):
+            #print("Iteration:["+str(i)+"]")
             self.train_test_sets(pct = pct)
             self.train_model()
             self.predict_labels()
