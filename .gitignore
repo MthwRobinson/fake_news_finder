@@ -5,3 +5,4 @@ fake_news.egg-info/*
 *.pickle
 *.tar.gz
 *.log
+.DS_Store

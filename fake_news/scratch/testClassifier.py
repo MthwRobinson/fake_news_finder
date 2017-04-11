@@ -2,12 +2,12 @@ from fake_news.vectorizer import Vectorizer
 from fake_news.classifier import NewsClassifier
 from sklearn.ensemble import RandomForestClassifier
 
-vectorizers = ['tfidf']
+vectorizers = ['word2vec']
 Sample = False 
-#for vectorizer_name in vectorizers:
-#	vectorizer = Vectorizer(vectorizer_name, sample = Sample)
-#	vectorizer.build_model()
-#	vectorizer.save_model()
+for vectorizer_name in vectorizers:
+	vectorizer = Vectorizer(vectorizer_name, sample = Sample)
+	vectorizer.build_model()
+	vectorizer.save_model()
 
 
 #print("After building model")
