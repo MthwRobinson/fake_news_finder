@@ -15,8 +15,8 @@ text_file.write(alphanumeric_content)
 text_file.close()
 
 sentences = LineSentence("Output.txt", max_sentence_length=10)
-#print(sentences)
-
+print(sentences)
+exit()
 
 min_count = 2
 size = 50
