@@ -17,6 +17,11 @@ class Word2VecSimple:
 
   def fit(self, corpus):
     a = self.get_doc2vec_all_corpus(corpus)
+
+    self.vocabs = dict()
+    for i in self.model.wv.vocab:
+      self.vocabs[i.lower()] = i
+
     print("Finish model")
 
 
@@ -27,14 +32,28 @@ class Word2VecSimple:
 
     vectorization = []
     for document in corpus:
+      #Process the document
       alphanumeric_document = re.sub('[^0-9a-zA-Z ]+', ' ', document)
+      doc_dictionary = dict()
+      data = ' '.join(alphanumeric_document.split(' ')).split(' ')
+      for word in data:
+        doc_dictionary[word.lower()] = True
+      #Finish process the document
+
       words_factors_list_of_lists = []
-      for i in self.model.wv.vocab:
-        if i in alphanumeric_document:
-          words_factors_list_of_lists.append(self.model[i])
+
+      #for word in doc_dictionary:
+      #  if word.lower() in self.vocabs:
+      #    words_factors_list_of_lists.append(self.model[self.vocabs[word.lower()]])
+
+      for word in self.model.wv.vocab:
+        if word.lower() in doc_dictionary:
+          words_factors_list_of_lists.append(self.model[word])
+
       vectorization_item = self.vectorize_document(words_factors_list_of_lists)
       if vectorization_item is not None:
         vectorization.append(vectorization_item)
+
     w = csr_matrix(np.asarray(vectorization))
     return normalize(w, norm='l1', axis=0)
 
