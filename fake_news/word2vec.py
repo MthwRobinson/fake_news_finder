@@ -14,14 +14,31 @@ class Word2VecSimple:
     self.size = size
     self.window = window
     self.vectorization_function = vectorization_function
+    self.normalize = True
 
   def fit(self, corpus):
     a = self.get_doc2vec_all_corpus(corpus)
 
+    #For fast lookup create a dictionary of words
     self.vocabs = dict()
     for i in self.model.wv.vocab:
       self.vocabs[i.lower()] = i
 
+    #Normalize prior any query:
+    self.normalized_model = []
+    self.word_index_dict = dict()
+    indeces = 0
+    for word in self.model.wv.vocab:
+      self.word_index_dict[word] = indeces
+      indeces = indeces + 1
+      self.normalized_model.append(self.model[word])
+
+    #self.normalized_model = np.array(self.normalized_model)
+    #self.normalized_model = np.apply_along_axis(scaling, axis=0, arr=self.normalized_model)
+    w = csr_matrix(np.asarray(self.normalized_model))
+    self.normalized_model = normalize(w, norm='l1', axis=0)
+    self.normalized_model = self.normalized_model.todense().tolist()
+    #print(self.normalized_model[:,26:])
     print("Finish model")
 
 
@@ -48,14 +65,16 @@ class Word2VecSimple:
 
       for word in self.model.wv.vocab:
         if word.lower() in doc_dictionary:
-          words_factors_list_of_lists.append(self.model[word])
+          index = self.word_index_dict[word]
+          words_factors_list_of_lists.append(self.normalized_model[index])
 
       vectorization_item = self.vectorize_document(words_factors_list_of_lists)
       if vectorization_item is not None:
         vectorization.append(vectorization_item)
 
     w = csr_matrix(np.asarray(vectorization))
-    return normalize(w, norm='l1', axis=0)
+    #return normalize(w, norm='l1', axis=0)
+    return w
 
   #This method creates the model and extract the vectorization in one go. It creates one distinct model per each document.
   #Is different with "fit()" and "transform()" in that in "fit()" and "transform()" the model is created from the beginning based on *all* documents and reused for the transform.
@@ -74,8 +93,12 @@ class Word2VecSimple:
       vectorization_item = self.get_doc2vec_maxmin(document_words)
       if vectorization_item is not None:
         return vectorization_item
-    else:
+    elif (self.vectorization_function == 'avg'):
       vectorization_item = self.get_doc2vec_avg(document_words)
+      if vectorization_item is not None:
+        return vectorization_item
+    else:
+      vectorization_item = self.get_doc2vec_max(document_words)
       if vectorization_item is not None:
         return vectorization_item
     return None
@@ -104,6 +127,25 @@ class Word2VecSimple:
       index_of_max = np.argmax(magnitudes)
       index_of_min = np.argmin(magnitudes)
       doc_vec = np.append(document_words[index_of_max], document_words[index_of_min])
+    
+    
+    return doc_vec
+
+  def get_doc2vec_max(self, document_words):
+    if document_words is None:
+      return None
+    document_words_array = np.array(document_words)
+    if len(document_words_array.shape) == 1 and len(document_words_array) == self.size:
+      #In case the document has only one word vector (each vector is size self.size).
+      doc_vec = np.append(document_words, document_words)
+    elif len(document_words_array.shape) == 1 and len(document_words_array) == 0:
+      #In this case, the documents_words is empty
+      return None
+    else:
+      magnitudes = np.apply_along_axis(get_magnitude, axis=1, arr=document_words)
+      index_of_max = np.argmax(magnitudes)
+      index_of_min = np.argmin(magnitudes)
+      doc_vec = document_words[index_of_max]
     
     
     return doc_vec
@@ -184,5 +226,13 @@ def get_mean(x):
 def get_magnitude(x):
   return math.sqrt(np.inner(x,x))
 
+def scaling(x):
+  maxim = max(x)
+  minim = min(x)
+
+  if maxim == minim:
+    size = len(x)
+    return np.ones(size) * 0.5
+  return (x - minim) / (maxim - minim)
 
 

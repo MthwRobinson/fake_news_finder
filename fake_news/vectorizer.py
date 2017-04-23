@@ -25,7 +25,7 @@ class Vectorizer():
 
 
         tfidf = TfidfVectorizer(stop_words='english', min_df=5, max_df=.5)
-        word2vec = Word2VecSimple(min_count = 0, size = 50, window = 4, vectorization_function = "maxmin")
+        word2vec = Word2VecSimple(min_count = 0, size = 50, window = 4, vectorization_function = "max") #vectorization_function maxmin, max, avg
         self.vectorizers = {
             'tfidf' : tfidf,
             'word2vec' : word2vec

@@ -118,8 +118,12 @@ class NewsClassifier():
         total = tp+tn+fp+fn
         accuracy = (tp+tn) / total
         precision = tp / (tp+fp)
-        recall = tp / (tp+fn)
-        fscore = 2*((precision*recall)/(precision+recall))
+        recall = 0
+        if tp + fn != 0:
+            recall = tp / (tp+fn)
+        fscore = 0
+        if precision+recall != 0 :
+            fscore = 2*((precision*recall)/(precision+recall))
         stats = {
             'accuracy' : accuracy,
             'precision' : precision,

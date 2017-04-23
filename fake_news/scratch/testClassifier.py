@@ -3,11 +3,11 @@ from fake_news.classifier import NewsClassifier
 from sklearn.ensemble import RandomForestClassifier
 
 vectorizers = ['word2vec']
-Sample = True
-for vectorizer_name in vectorizers:
-	vectorizer = Vectorizer(vectorizer_name, sample = Sample)
-	vectorizer.build_model()
-	vectorizer.save_model()
+#Sample = True
+#for vectorizer_name in vectorizers:
+#	vectorizer = Vectorizer(vectorizer_name, sample = Sample)
+#	vectorizer.build_model()
+#	vectorizer.save_model()
 
 #exit()
 
@@ -18,21 +18,21 @@ vectorizers = ['word2vec']
 for vectorizer in vectorizers:
 	clf = RandomForestClassifier(n_estimators=70)
 	nc = NewsClassifier(clf, vectorizer)
-	results = nc.bootstrap_evaluate(iters = 10, metric = 'precision', pct = .8)
+	results = nc.bootstrap_evaluate(iters = 2, metric = 'precision', pct = .8)
 	#results = nc.evaluate_model()
 	print("Printing results: " + vectorizer)
 	print(results)
 
 	clf = RandomForestClassifier(n_estimators=70)
 	nc = NewsClassifier(clf, vectorizer)
-	results = nc.bootstrap_evaluate(iters = 10, metric = 'recall', pct = .8)
+	results = nc.bootstrap_evaluate(iters = 2, metric = 'recall', pct = .8)
 	#results = nc.evaluate_model()
 	print("Printing results: " + vectorizer)
 	print(results)
 
 	clf = RandomForestClassifier(n_estimators=70)
 	nc = NewsClassifier(clf, vectorizer)
-	results = nc.bootstrap_evaluate(iters = 10, metric = 'fscore', pct = .8)
+	results = nc.bootstrap_evaluate(iters = 2, metric = 'fscore', pct = .8)
 	#results = nc.evaluate_model()
 	print("Printing results: " + vectorizer)
 	print(results)
