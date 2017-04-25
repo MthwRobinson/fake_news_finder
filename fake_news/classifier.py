@@ -8,7 +8,9 @@ else:
     import cPickle as pickle
 import random
 import numpy as np
+import pandas as pd
 from scipy.stats import ttest_ind
+import os
 
 
 class NewsClassifier():
@@ -42,8 +44,26 @@ class NewsClassifier():
         # Only import the model if the vectorizer has changed
         if self.vec != vec:
             vec_file = self.dir + '/models/vecs/' + vec + '.pickle'
-            with open(vec_file, 'rb') as f:
-                self.df = pickle.load(f)
+            if os.path.isfile(vec_file):
+                with open(vec_file, 'rb') as f:
+                    self.df = pickle.load(f)
+            else:
+                #Below is the workaround for bug in MacOS, Python 3.4 described here:
+                ##http://deo.im/2016/09/20/Pickle-can-t-dump-2GB-file/
+                vec_file = self.dir + '/models/vecs/' + vec + '.0.pickle'
+                if os.path.isfile(vec_file):
+                    max_index = 0
+                    vec_file = self.dir + '/models/vecs/' + vec + '.' + str(max_index+1) + '.pickle'
+                    while os.path.isfile(vec_file):
+                        max_index = max_index + 1
+                        vec_file = self.dir + '/models/vecs/' + vec + '.' + str(max_index+1) + '.pickle'
+                    list_of_dataframes = []
+                    for i in range(0,max_index+1):
+                        vec_file = self.dir + '/models/vecs/' + vec + '.' + str(i) + '.pickle'
+                        with open(vec_file, 'rb') as f:
+                            list_of_dataframes.append(pickle.load(f))
+                    self.df = pd.concat(list_of_dataframes)
+
         self.vec = vec
 
     def train_test_sets(self, pct, random_seed = 21189):
@@ -109,20 +129,24 @@ class NewsClassifier():
                 tp += 1
             if y[i] == 0 and ypred[i] == 0:
                 tn += 1
-            if y[i] == 1 and ypred[i] == 0:
-                fp += 1
             if y[i] == 0 and ypred[i] == 1:
+                fp += 1
+            if y[i] == 1 and ypred[i] == 0:
                 fn += 1
 
         # Compute summary statistics
+
         total = tp+tn+fp+fn
+        print("Total:" + str(total) + "| True Positive:" +str(tp) + "| True Negative:"  + str(tn) + "| False Positive:"+str(fp) + "| False Negative:" + str(fn))
         accuracy = (tp+tn) / total
-        precision = tp / (tp+fp)
-        recall = 0
+        precision = None 
+        if tp + fp != 0:
+            precision = tp / (tp+fp)
+        recall = None
         if tp + fn != 0:
             recall = tp / (tp+fn)
-        fscore = 0
-        if precision+recall != 0 :
+        fscore = None
+        if precision is not None and recall is not None and precision + recall != 0:
             fscore = 2*((precision*recall)/(precision+recall))
         stats = {
             'accuracy' : accuracy,

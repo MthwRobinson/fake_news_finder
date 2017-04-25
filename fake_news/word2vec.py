@@ -33,12 +33,15 @@ class Word2VecSimple:
       indeces = indeces + 1
       self.normalized_model.append(self.model[word])
 
-    #self.normalized_model = np.array(self.normalized_model)
-    #self.normalized_model = np.apply_along_axis(scaling, axis=0, arr=self.normalized_model)
-    w = csr_matrix(np.asarray(self.normalized_model))
-    self.normalized_model = normalize(w, norm='l1', axis=0)
-    self.normalized_model = self.normalized_model.todense().tolist()
-    #print(self.normalized_model[:,26:])
+    # Scaling:
+    self.normalized_model = np.array(self.normalized_model)
+    self.normalized_model = np.apply_along_axis(scaling, axis=0, arr=self.normalized_model)
+    self.normalized_model = self.normalized_model.tolist()
+    # Normalizing:
+    #   w = csr_matrix(np.asarray(self.normalized_model))
+    #   self.normalized_model = normalize(w, norm='l1', axis=0)
+    #   self.normalized_model = self.normalized_model.todense().tolist()
+    #   print(self.normalized_model[:,26:])
     print("Finish model")
 
 
@@ -63,10 +66,17 @@ class Word2VecSimple:
       #  if word.lower() in self.vocabs:
       #    words_factors_list_of_lists.append(self.model[self.vocabs[word.lower()]])
 
-      for word in self.model.wv.vocab:
-        if word.lower() in doc_dictionary:
-          index = self.word_index_dict[word]
-          words_factors_list_of_lists.append(self.normalized_model[index])
+      for word in doc_dictionary:
+        if word.lower() in self.vocabs:
+          original_case_word = self.vocabs[word.lower()]
+          index_in_normalized_model = self.word_index_dict[original_case_word]
+          model_to_append = self.normalized_model[index_in_normalized_model]
+          words_factors_list_of_lists.append(model_to_append)
+
+      #for word in self.model.wv.vocab:
+      #  if word.lower() in doc_dictionary:
+      #    index = self.word_index_dict[word]
+      #    words_factors_list_of_lists.append(self.normalized_model[index])
 
       vectorization_item = self.vectorize_document(words_factors_list_of_lists)
       if vectorization_item is not None:
