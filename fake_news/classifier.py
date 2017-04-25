@@ -18,7 +18,7 @@ class NewsClassifier():
     vec is the name of the pickle file with the vectorized
         news article examples
     """
-    def __init__(self, clf, vec):
+    def __init__(self, clf = None, vec = None):
         """
         Instantiates the class
         clf is an sklearn-type classfier
@@ -26,8 +26,10 @@ class NewsClassifier():
         """
         self.dir = os.path.dirname(os.path.realpath(__file__))
         self.vec = None
-        self.set_vectorizer(vec)
-        self.set_classifier(clf)
+        if vec:
+            self.set_vectorizer(vec)
+        if clf:
+            self.set_classifier(clf)
 
     def set_classifier(self, clf):
         """
