@@ -1,10 +1,13 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
-import pickle
+from fake_news.word2vec import Word2VecSimple
+import _pickle as pickle
 import pandas as pd
 import os
-import conf
+from fake_news import conf
 from unidecode import unidecode
 import random
+import sys
+import math
 
 class Vectorizer():
     """
@@ -24,8 +27,10 @@ class Vectorizer():
 
 
         tfidf = TfidfVectorizer(stop_words='english', min_df=5, max_df=.5)
+        word2vec = Word2VecSimple(min_count = 0, size = 50, window = 4, vectorization_function = "max") #vectorization_function maxmin, max, avg
         self.vectorizers = {
-            'tfidf' : tfidf 
+            'tfidf' : tfidf,
+            'word2vec' : word2vec
         }
 
         self.vectorizer = self.vectorizers[name]
@@ -82,19 +87,53 @@ class Vectorizer():
         # numbered model name that has not been used yet
         model_dir = self.dir+'/models/vecs'
         print('Saving model ...')
-        if self.name:
-            filename = model_dir + '/' + self.name + '.pickle'
-        else:
-            files = os.listdir(model_dir)
-            already_used = True
-            i = 0
-            while already_used:
-                filename = 'model_'+ str(i) + '.pickle'
-                if filename in files:
-                    i += 1
+
+        object_to_be_saved = self.model_df
+        rows_count = len(self.model_df.index)
+        #due to bug we need to split in sections lower than 2 GB:
+        #http://deo.im/2016/09/20/Pickle-can-t-dump-2GB-file/
+        if sys.getsizeof(self.model_df) >= 2147483648:
+             rows_count = len(self.model_df.index)
+             size_byte = sys.getsizeof(self.model_df) 
+             size_gbyte = size_byte / (1024 * 1024 * 1024)
+             sections_row_count = math.floor( (rows_count * 1.9) / (size_gbyte) ) 
+             sections_count = math.ceil(rows_count/sections_row_count)
+             next_start = 0
+             next_end = sections_row_count
+             for j in range(0,sections_count):
+                section = self.model_df.iloc[next_start:next_end]
+                next_start = next_end
+                next_end = next_end + sections_row_count
+                if self.name:
+                    filename = model_dir + '/' + self.name + '.' + str(j) + '.pickle'
                 else:
-                    already_used = False
-            filename = model_dir + '/' + filename
-        with open(filename, 'wb') as f:
-            pickle.dump(self.model_df, f)
+                    files = os.listdir(model_dir)
+                    already_used = True
+                    i = 0
+                    while already_used:
+                        filename = 'model_'+ str(i) + '.' + str(j) + '.pickle'
+                        if filename in files:
+                            i += 1
+                        else:
+                            already_used = False
+                    filename = model_dir + '/' + filename
+                with open(filename, 'wb') as f:
+                    pickle.dump(section, f, protocol=4)
+
+        else:
+            if self.name:
+                filename = model_dir + '/' + self.name + '.pickle'
+            else:
+                files = os.listdir(model_dir)
+                already_used = True
+                i = 0
+                while already_used:
+                    filename = 'model_'+ str(i) + '.pickle'
+                    if filename in files:
+                        i += 1
+                    else:
+                        already_used = False
+                filename = model_dir + '/' + filename
+            with open(filename, 'wb') as f:
+                pickle.dump(self.model_df, f, protocol=4)
 

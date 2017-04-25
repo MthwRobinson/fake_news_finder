@@ -15,8 +15,8 @@ text_file.write(alphanumeric_content)
 text_file.close()
 
 sentences = LineSentence("Output.txt", max_sentence_length=10)
-#print(sentences)
-
+print(sentences)
+#exit()
 
 min_count = 2
 size = 50
@@ -24,6 +24,7 @@ window = 4
 model = Word2Vec(sentences, min_count=min_count, size=size, window=window)
 #print(model.wv.vocab)
 for i in model.wv.vocab:
+	print(i)
 	print(model[i])
   
 #print(model[page_list[0]])
