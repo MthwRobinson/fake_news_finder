@@ -68,7 +68,7 @@ class NewsClassifier():
 
         self.vec = vec
 
-    def train_test_sets(self, pct, random_seed = 21189):
+    def train_test_sets(self, pct, random_seed = None):
         """
         Splits the data into training and test sets
         """

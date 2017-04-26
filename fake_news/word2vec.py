@@ -7,8 +7,6 @@ import math
 import re
 
 class Word2VecSimple:
-
-
   def __init__(self, min_count = 1, size = 50, window = 4, vectorization_function = "maxmin"):
     self.min_count = min_count
     self.size = size

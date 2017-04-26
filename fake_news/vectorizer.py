@@ -1,6 +1,6 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from fake_news.word2vec import Word2VecSimple
-import _pickle as pickle
+import pickle as pickle
 import pandas as pd
 import os
 from fake_news import conf
@@ -118,7 +118,7 @@ class Vectorizer():
                             already_used = False
                     filename = model_dir + '/' + filename
                 with open(filename, 'wb') as f:
-                    pickle.dump(section, f, protocol=4)
+                    pickle.dump(section, f, protocol=2)
 
         else:
             if self.name:
@@ -135,5 +135,5 @@ class Vectorizer():
                         already_used = False
                 filename = model_dir + '/' + filename
             with open(filename, 'wb') as f:
-                pickle.dump(self.model_df, f, protocol=4)
+                pickle.dump(self.model_df, f, protocol=2)
 
