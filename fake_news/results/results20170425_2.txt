@@ -1,0 +1,272 @@
+Loading news classifier ...
+Now testing Naive Bayes: TFIDF
+Total:648| True Positive:248| True Negative:271| False Positive:74| False Negative:55
+Total:648| True Positive:290| True Negative:249| False Positive:60| False Negative:49
+Total:648| True Positive:266| True Negative:270| False Positive:60| False Negative:52
+Total:648| True Positive:261| True Negative:263| False Positive:53| False Negative:71
+Total:648| True Positive:271| True Negative:276| False Positive:57| False Negative:44
+Total:648| True Positive:264| True Negative:263| False Positive:71| False Negative:50
+Total:648| True Positive:273| True Negative:251| False Positive:70| False Negative:54
+Total:648| True Positive:242| True Negative:281| False Positive:60| False Negative:65
+Total:648| True Positive:265| True Negative:259| False Positive:65| False Negative:59
+Total:648| True Positive:262| True Negative:267| False Positive:67| False Negative:52
+Total:648| True Positive:276| True Negative:247| False Positive:65| False Negative:60
+Total:648| True Positive:273| True Negative:258| False Positive:64| False Negative:53
+Total:648| True Positive:254| True Negative:265| False Positive:53| False Negative:76
+Total:648| True Positive:267| True Negative:240| False Positive:72| False Negative:69
+Total:648| True Positive:274| True Negative:248| False Positive:58| False Negative:68
+Total:648| True Positive:269| True Negative:255| False Positive:65| False Negative:59
+Total:648| True Positive:277| True Negative:260| False Positive:62| False Negative:49
+Total:648| True Positive:253| True Negative:276| False Positive:74| False Negative:45
+Total:648| True Positive:267| True Negative:257| False Positive:66| False Negative:58
+Total:648| True Positive:278| True Negative:255| False Positive:70| False Negative:45
+Total:648| True Positive:270| True Negative:255| False Positive:67| False Negative:56
+Total:648| True Positive:267| True Negative:260| False Positive:58| False Negative:63
+Total:648| True Positive:260| True Negative:260| False Positive:58| False Negative:70
+Total:648| True Positive:266| True Negative:247| False Positive:74| False Negative:61
+Total:648| True Positive:278| True Negative:259| False Positive:53| False Negative:58
+Total:648| True Positive:253| True Negative:263| False Positive:84| False Negative:48
+Total:648| True Positive:265| True Negative:254| False Positive:72| False Negative:57
+Total:648| True Positive:271| True Negative:259| False Positive:54| False Negative:64
+Total:648| True Positive:276| True Negative:252| False Positive:65| False Negative:55
+Total:648| True Positive:263| True Negative:258| False Positive:60| False Negative:67
+Now testing Naive Bayes: Word2Vec
+Total:648| True Positive:182| True Negative:169| False Positive:176| False Negative:121
+Total:648| True Positive:199| True Negative:167| False Positive:142| False Negative:140
+Total:648| True Positive:202| True Negative:170| False Positive:160| False Negative:116
+Total:648| True Positive:199| True Negative:170| False Positive:146| False Negative:133
+Total:648| True Positive:195| True Negative:172| False Positive:161| False Negative:120
+Total:648| True Positive:188| True Negative:168| False Positive:166| False Negative:126
+Total:648| True Positive:187| True Negative:175| False Positive:146| False Negative:140
+Total:648| True Positive:182| True Negative:189| False Positive:152| False Negative:125
+Total:648| True Positive:189| True Negative:163| False Positive:161| False Negative:135
+Total:648| True Positive:190| True Negative:185| False Positive:149| False Negative:124
+Total:648| True Positive:201| True Negative:174| False Positive:138| False Negative:135
+Total:648| True Positive:191| True Negative:160| False Positive:162| False Negative:135
+Total:648| True Positive:196| True Negative:156| False Positive:162| False Negative:134
+Total:648| True Positive:196| True Negative:178| False Positive:134| False Negative:140
+Total:648| True Positive:216| True Negative:150| False Positive:156| False Negative:126
+Total:648| True Positive:171| True Negative:176| False Positive:144| False Negative:157
+Total:648| True Positive:192| True Negative:177| False Positive:145| False Negative:134
+Total:648| True Positive:175| True Negative:176| False Positive:174| False Negative:123
+Total:648| True Positive:185| True Negative:156| False Positive:167| False Negative:140
+Total:648| True Positive:198| True Negative:175| False Positive:150| False Negative:125
+Total:648| True Positive:190| True Negative:174| False Positive:148| False Negative:136
+Total:648| True Positive:198| True Negative:178| False Positive:140| False Negative:132
+Total:648| True Positive:193| True Negative:168| False Positive:150| False Negative:137
+Total:648| True Positive:182| True Negative:168| False Positive:153| False Negative:145
+Total:648| True Positive:185| True Negative:164| False Positive:148| False Negative:151
+Total:648| True Positive:178| True Negative:196| False Positive:151| False Negative:123
+Total:648| True Positive:195| True Negative:164| False Positive:162| False Negative:127
+Total:648| True Positive:192| True Negative:167| False Positive:146| False Negative:143
+Total:648| True Positive:185| True Negative:165| False Positive:152| False Negative:146
+Total:648| True Positive:192| True Negative:164| False Positive:154| False Negative:138
+Now testing Random Forest: TFIDF
+Total:648| True Positive:250| True Negative:294| False Positive:51| False Negative:53
+Total:648| True Positive:288| True Negative:250| False Positive:59| False Negative:51
+Total:648| True Positive:259| True Negative:281| False Positive:49| False Negative:59
+Total:648| True Positive:266| True Negative:271| False Positive:45| False Negative:66
+Total:648| True Positive:256| True Negative:276| False Positive:57| False Negative:59
+Total:648| True Positive:261| True Negative:277| False Positive:57| False Negative:53
+Total:648| True Positive:260| True Negative:265| False Positive:56| False Negative:67
+Total:648| True Positive:239| True Negative:285| False Positive:56| False Negative:68
+Total:648| True Positive:262| True Negative:276| False Positive:48| False Negative:62
+Total:648| True Positive:265| True Negative:277| False Positive:57| False Negative:49
+Total:648| True Positive:274| True Negative:261| False Positive:51| False Negative:62
+Total:648| True Positive:275| True Negative:266| False Positive:56| False Negative:51
+Total:648| True Positive:258| True Negative:274| False Positive:44| False Negative:72
+Total:648| True Positive:278| True Negative:255| False Positive:57| False Negative:58
+Total:648| True Positive:273| True Negative:251| False Positive:55| False Negative:69
+Total:648| True Positive:254| True Negative:275| False Positive:45| False Negative:74
+Total:648| True Positive:276| True Negative:273| False Positive:49| False Negative:50
+Total:648| True Positive:244| True Negative:290| False Positive:60| False Negative:54
+Total:648| True Positive:255| True Negative:274| False Positive:49| False Negative:70
+Total:648| True Positive:256| True Negative:267| False Positive:58| False Negative:67
+Total:648| True Positive:275| True Negative:272| False Positive:50| False Negative:51
+Total:648| True Positive:260| True Negative:264| False Positive:54| False Negative:70
+Total:648| True Positive:274| True Negative:277| False Positive:41| False Negative:56
+Total:648| True Positive:270| True Negative:256| False Positive:65| False Negative:57
+Total:648| True Positive:268| True Negative:263| False Positive:49| False Negative:68
+Total:648| True Positive:250| True Negative:291| False Positive:56| False Negative:51
+Total:648| True Positive:260| True Negative:271| False Positive:55| False Negative:62
+Total:648| True Positive:279| True Negative:270| False Positive:43| False Negative:56
+Total:648| True Positive:271| True Negative:257| False Positive:60| False Negative:60
+Total:648| True Positive:255| True Negative:276| False Positive:42| False Negative:75
+Now testing Random Forest: Word2Vec
+Total:648| True Positive:204| True Negative:134| False Positive:211| False Negative:99
+Total:648| True Positive:203| True Negative:157| False Positive:152| False Negative:136
+Total:648| True Positive:224| True Negative:126| False Positive:204| False Negative:94
+Total:648| True Positive:198| True Negative:165| False Positive:151| False Negative:134
+Total:648| True Positive:216| True Negative:137| False Positive:196| False Negative:99
+Total:648| True Positive:193| True Negative:165| False Positive:169| False Negative:121
+Total:648| True Positive:193| True Negative:170| False Positive:151| False Negative:134
+Total:648| True Positive:235| True Negative:115| False Positive:226| False Negative:72
+Total:648| True Positive:192| True Negative:157| False Positive:167| False Negative:132
+Total:648| True Positive:195| True Negative:172| False Positive:162| False Negative:119
+Total:648| True Positive:204| True Negative:170| False Positive:142| False Negative:132
+Total:648| True Positive:192| True Negative:159| False Positive:163| False Negative:134
+Total:648| True Positive:197| True Negative:154| False Positive:164| False Negative:133
+Total:648| True Positive:201| True Negative:171| False Positive:141| False Negative:135
+Total:648| True Positive:214| True Negative:145| False Positive:161| False Negative:128
+Total:648| True Positive:206| True Negative:132| False Positive:188| False Negative:122
+Total:648| True Positive:222| True Negative:134| False Positive:188| False Negative:104
+Total:648| True Positive:176| True Negative:169| False Positive:181| False Negative:122
+Total:648| True Positive:189| True Negative:152| False Positive:171| False Negative:136
+Total:648| True Positive:233| True Negative:132| False Positive:193| False Negative:90
+Total:648| True Positive:190| True Negative:175| False Positive:147| False Negative:136
+Total:648| True Positive:231| True Negative:134| False Positive:184| False Negative:99
+Total:648| True Positive:225| True Negative:125| False Positive:193| False Negative:105
+Total:648| True Positive:182| True Negative:167| False Positive:154| False Negative:145
+Total:648| True Positive:190| True Negative:161| False Positive:151| False Negative:146
+Total:648| True Positive:229| True Negative:122| False Positive:225| False Negative:72
+Total:648| True Positive:202| True Negative:157| False Positive:169| False Negative:120
+Total:648| True Positive:190| True Negative:166| False Positive:147| False Negative:145
+Total:648| True Positive:183| True Negative:161| False Positive:156| False Negative:148
+Total:648| True Positive:195| True Negative:162| False Positive:156| False Negative:135
+Now testing Logistic Regression: TFIDF
+Total:648| True Positive:247| True Negative:297| False Positive:48| False Negative:56
+Total:648| True Positive:287| True Negative:260| False Positive:49| False Negative:52
+Total:648| True Positive:266| True Negative:279| False Positive:51| False Negative:52
+Total:648| True Positive:259| True Negative:270| False Positive:46| False Negative:73
+Total:648| True Positive:263| True Negative:290| False Positive:43| False Negative:52
+Total:648| True Positive:262| True Negative:280| False Positive:54| False Negative:52
+Total:648| True Positive:268| True Negative:270| False Positive:51| False Negative:59
+Total:648| True Positive:242| True Negative:294| False Positive:47| False Negative:65
+Total:648| True Positive:262| True Negative:273| False Positive:51| False Negative:62
+Total:648| True Positive:261| True Negative:288| False Positive:46| False Negative:53
+Total:648| True Positive:285| True Negative:262| False Positive:50| False Negative:51
+Total:648| True Positive:277| True Negative:263| False Positive:59| False Negative:49
+Total:648| True Positive:247| True Negative:271| False Positive:47| False Negative:83
+Total:648| True Positive:266| True Negative:259| False Positive:53| False Negative:70
+Total:648| True Positive:275| True Negative:251| False Positive:55| False Negative:67
+Total:648| True Positive:261| True Negative:269| False Positive:51| False Negative:67
+Total:648| True Positive:279| True Negative:267| False Positive:55| False Negative:47
+Total:648| True Positive:253| True Negative:290| False Positive:60| False Negative:45
+Total:648| True Positive:259| True Negative:265| False Positive:58| False Negative:66
+Total:648| True Positive:267| True Negative:274| False Positive:51| False Negative:56
+Total:648| True Positive:270| True Negative:269| False Positive:53| False Negative:56
+Total:648| True Positive:265| True Negative:271| False Positive:47| False Negative:65
+Total:648| True Positive:269| True Negative:276| False Positive:42| False Negative:61
+Total:648| True Positive:262| True Negative:265| False Positive:56| False Negative:65
+Total:648| True Positive:279| True Negative:272| False Positive:40| False Negative:57
+Total:648| True Positive:259| True Negative:278| False Positive:69| False Negative:42
+Total:648| True Positive:264| True Negative:266| False Positive:60| False Negative:58
+Total:648| True Positive:274| True Negative:278| False Positive:35| False Negative:61
+Total:648| True Positive:273| True Negative:268| False Positive:49| False Negative:58
+Total:648| True Positive:258| True Negative:279| False Positive:39| False Negative:72
+Now testing Logistic Regression: Word2Vec
+Total:648| True Positive:201| True Negative:135| False Positive:210| False Negative:102
+Total:648| True Positive:202| True Negative:158| False Positive:151| False Negative:137
+Total:648| True Positive:224| True Negative:127| False Positive:203| False Negative:94
+Total:648| True Positive:198| True Negative:164| False Positive:152| False Negative:134
+Total:648| True Positive:213| True Negative:138| False Positive:195| False Negative:102
+Total:648| True Positive:188| True Negative:168| False Positive:166| False Negative:126
+Total:648| True Positive:192| True Negative:166| False Positive:155| False Negative:135
+Total:648| True Positive:235| True Negative:114| False Positive:227| False Negative:72
+Total:648| True Positive:190| True Negative:160| False Positive:164| False Negative:134
+Total:648| True Positive:194| True Negative:175| False Positive:159| False Negative:120
+Total:648| True Positive:203| True Negative:172| False Positive:140| False Negative:133
+Total:648| True Positive:192| True Negative:160| False Positive:162| False Negative:134
+Total:648| True Positive:196| True Negative:155| False Positive:163| False Negative:134
+Total:648| True Positive:195| True Negative:174| False Positive:138| False Negative:141
+Total:648| True Positive:211| True Negative:146| False Positive:160| False Negative:131
+Total:648| True Positive:170| True Negative:173| False Positive:147| False Negative:158
+Total:648| True Positive:222| True Negative:138| False Positive:184| False Negative:104
+Total:648| True Positive:173| True Negative:170| False Positive:180| False Negative:125
+Total:648| True Positive:188| True Negative:152| False Positive:171| False Negative:137
+Total:648| True Positive:201| True Negative:172| False Positive:153| False Negative:122
+Total:648| True Positive:190| True Negative:173| False Positive:149| False Negative:136
+Total:648| True Positive:228| True Negative:136| False Positive:182| False Negative:102
+Total:648| True Positive:224| True Negative:126| False Positive:192| False Negative:106
+Total:648| True Positive:182| True Negative:166| False Positive:155| False Negative:145
+Total:648| True Positive:185| True Negative:163| False Positive:149| False Negative:151
+Total:648| True Positive:229| True Negative:120| False Positive:227| False Negative:72
+Total:648| True Positive:198| True Negative:158| False Positive:168| False Negative:124
+Total:648| True Positive:190| True Negative:164| False Positive:149| False Negative:145
+Total:648| True Positive:182| True Negative:164| False Positive:153| False Negative:149
+Total:648| True Positive:192| True Negative:163| False Positive:155| False Negative:138
+
+--------------------------------------
+Logistic Regression: TFIDF
+Mean: 0.828704855273
+Median: 0.828704855273
+Max: 0.851908396947
+Min: 0.791666666667
+T-tests:
+    P-val (Naive Bayes: Word2Vec): 2.53753563917e-54
+    P-val (Logistic Regression: Word2Vec): 1.5329304933e-49
+    P-val (Random Forest: TFIDF): 0.146074664688
+    P-val (Naive Bayes: TFIDF): 0.000140999655029
+    P-val (Random Forest: Word2Vec): 5.42083023689e-50
+--------------------------------------
+
+--------------------------------------
+Naive Bayes: Word2Vec
+Mean: 0.570772362639
+Median: 0.570772362639
+Max: 0.605042016807
+Min: 0.531881804044
+T-tests:
+    P-val (Logistic Regression: Word2Vec): 0.375082740419
+    P-val (Random Forest: TFIDF): 2.18324441307e-54
+    P-val (Naive Bayes: TFIDF): 1.49416051637e-53
+    P-val (Random Forest: Word2Vec): 0.0609966695387
+    P-val (Logistic Regression: TFIDF): 2.53753563917e-54
+--------------------------------------
+
+--------------------------------------
+Logistic Regression: Word2Vec
+Mean: 0.575529007625
+Median: 0.575529007625
+Max: 0.616216216216
+Min: 0.527131782946
+T-tests:
+    P-val (Naive Bayes: Word2Vec): 0.375082740419
+    P-val (Random Forest: TFIDF): 2.04216596503e-49
+    P-val (Naive Bayes: TFIDF): 1.57682746483e-48
+    P-val (Random Forest: Word2Vec): 0.387766126847
+    P-val (Logistic Regression: TFIDF): 1.5329304933e-49
+--------------------------------------
+
+--------------------------------------
+Random Forest: TFIDF
+Mean: 0.823186099428
+Median: 0.823186099428
+Max: 0.849612403101
+Min: 0.794019933555
+T-tests:
+    P-val (Naive Bayes: Word2Vec): 2.18324441307e-54
+    P-val (Logistic Regression: Word2Vec): 2.04216596503e-49
+    P-val (Naive Bayes: TFIDF): 0.00965494753977
+    P-val (Random Forest: Word2Vec): 6.85161526862e-50
+    P-val (Logistic Regression: TFIDF): 0.146074664688
+--------------------------------------
+
+--------------------------------------
+Naive Bayes: TFIDF
+Mean: 0.813533561031
+Median: 0.813533561031
+Max: 0.842923794712
+Min: 0.791111111111
+T-tests:
+    P-val (Naive Bayes: Word2Vec): 1.49416051637e-53
+    P-val (Logistic Regression: Word2Vec): 1.57682746483e-48
+    P-val (Random Forest: TFIDF): 0.00965494753977
+    P-val (Random Forest: Word2Vec): 5.4645497922e-49
+    P-val (Logistic Regression: TFIDF): 0.000140999655029
+--------------------------------------
+
+--------------------------------------
+Random Forest: Word2Vec
+Mean: 0.580596493114
+Median: 0.580596493114
+Max: 0.622162883845
+Min: 0.537404580153
+T-tests:
+    P-val (Naive Bayes: Word2Vec): 0.0609966695387
+    P-val (Logistic Regression: Word2Vec): 0.387766126847
+    P-val (Random Forest: TFIDF): 6.85161526862e-50
+    P-val (Naive Bayes: TFIDF): 5.4645497922e-49
+    P-val (Logistic Regression: TFIDF): 5.42083023689e-50
+--------------------------------------
+Done! Models evaluated in 7 minutes

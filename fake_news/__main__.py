@@ -65,8 +65,7 @@ def test_models(iters, metric, pct, random_seed):
     print('Loading news classifier ...')
     # Instantiate the classifier
     model_list = conf.model_list
-    first_model= model_list[0]
-    nc = NewsClassifier(clf = first_model['clf'], vec = first_model['vec'])
+    nc = NewsClassifier()
 
     # Compare the models
     perf = nc.compare_models(
