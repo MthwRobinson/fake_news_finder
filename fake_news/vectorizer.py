@@ -1,5 +1,6 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from fake_news.word2vec import Word2VecSimple
+from fake_news.doc2vec import Doc2VecSimple
 import _pickle as pickle
 import pandas as pd
 import os
@@ -15,7 +16,7 @@ class Vectorizer():
     with a fit_transform method that converts the test to 
     a matrix
     """
-    def __init__(self, name = None, sample = True):
+    def __init__(self, name = None, sample = True, size = 50, window = 4, min_count=1):
         self.dir = os.path.dirname(os.path.realpath(__file__))
         self.fake_news_file = self.dir + conf.fake_news_file
         self.real_news_file = self.dir + conf.real_news_file
@@ -27,10 +28,12 @@ class Vectorizer():
 
 
         tfidf = TfidfVectorizer(stop_words='english', min_df=5, max_df=.5)
-        word2vec = Word2VecSimple(min_count = 0, size = 50, window = 4, vectorization_function = "max") #vectorization_function maxmin, max, avg
+        word2vec = Word2VecSimple(min_count = 0, size = size, window = window, vectorization_function = "max") #vectorization_function maxmin, max, avg
+        doc2vec = Doc2VecSimple(min_count = min_count, size = size, window = window, alpha=0.5, dm=2) 
         self.vectorizers = {
             'tfidf' : tfidf,
-            'word2vec' : word2vec
+            'word2vec' : word2vec,
+            'doc2vec' : doc2vec
         }
 
         self.vectorizer = self.vectorizers[name]
