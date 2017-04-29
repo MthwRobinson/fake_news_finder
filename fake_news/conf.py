@@ -36,9 +36,9 @@ real_news = [
 
 model_list = [
     {
-        'name' : 'Naive Bayes: TFIDF',
+        'name' : 'Naive Bayes: Doc2Vec',
         'clf' : MultinomialNB(),
-        'vec' : 'tfidf'
+        'vec' : 'doc2vec'
 
     },
     {
@@ -48,33 +48,33 @@ model_list = [
 
     },
     {
-        'name' : 'Random Forest: TFIDF',
+        'name' : 'Random Forest: Doc2Vec',
         'clf' : RandomForestClassifier(n_estimators=70),
-        'vec' : 'tfidf'
+        'vec' : 'doc2vec'
     },
     {
         'name' : 'Random Forest: Word2Vec',
         'clf' : RandomForestClassifier(n_estimators=70),
         'vec' : 'word2vec'
-    },
-    {
-        'name' : 'Support Vector Machine: TFIDF',
-        'clf' : SVC(),
-        'vec' : 'tfidf'
-    },
-    {
-        'name' : 'Support Vector Machine: Word2Vec',
-        'clf' : SVC(),
-        'vec' : 'word2vec'
-    },
-    {
-        'name' : 'Logistic Regression: TFIDF',
-        'clf' : LogisticRegression(),
-        'vec' : 'tfidf'
-    },
-    {
-        'name' : 'Logistic Regression: Word2Vec',
-        'clf' : LogisticRegression(),
-        'vec' : 'word2vec'
-    },
+    }#,
+    #{
+    #    'name' : 'Support Vector Machine: Doc2Vec',
+    #    'clf' : SVC(kernel='linear'),
+    #    'vec' : 'tfidf'
+    #},
+    #{
+    #    'name' : 'Support Vector Machine: Word2Vec',
+    #    'clf' : SVC(kernel='linear'),
+    #    'vec' : 'word2vec'
+    #},
+    #{
+    #    'name' : 'Logistic Regression: TFIDF',
+    #    'clf' : LogisticRegression(),
+    #    'vec' : 'tfidf'
+    #},
+    #{
+    #    'name' : 'Logistic Regression: Word2Vec',
+    #    'clf' : LogisticRegression(),
+    #    'vec' : 'word2vec'
+    #},
 ]

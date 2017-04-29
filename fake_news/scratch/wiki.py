@@ -23,6 +23,7 @@ size = 50
 window = 4
 model = Word2Vec(sentences, min_count=min_count, size=size, window=window)
 #print(model.wv.vocab)
+
 for i in model.wv.vocab:
 	print(i)
 	print(model[i])

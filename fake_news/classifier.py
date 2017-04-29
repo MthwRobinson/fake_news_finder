@@ -28,9 +28,9 @@ class NewsClassifier():
         """
         self.dir = os.path.dirname(os.path.realpath(__file__))
         self.vec = None
-        if vec:
+        if vec is not None:
             self.set_vectorizer(vec)
-        if clf:
+        if clf is not None:
             self.set_classifier(clf)
 
     def set_classifier(self, clf):

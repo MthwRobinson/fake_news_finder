@@ -7,9 +7,9 @@ import pandas as pd
 
 #windows = [1,2,3, 4, 6, 10, 20, 50, 100]
 #sizes = [10, 25, 50, 100, 300, 500, 750, 1000, 2000]
-windows = [4]
+windows = [10]
 min_counts = [1, 10, 50, 100, 300, 500, 900, 1500]
-sizes = [50, 500, 750, 1000, 2000, 3000, 500]
+sizes = [50, 500, 750, 1000, 2000, 3000, 5000]
 #windows = [1]
 #sizes = [1]
 
@@ -22,17 +22,18 @@ for min_coun in min_counts:
 			vectorizers = ['doc2vec']
 			#vectorizers = ['word2vec', 'tfidf']
 			Sample = True
-			for vectorizer_name in vectorizers:
-				vectorizer = Vectorizer(vectorizer_name, sample = Sample, size = siz, window = windo, min_count= min_coun)
-				vectorizer.build_model()
-				vectorizer.save_model()
+			create_model = True
+			if create_model:
+				for vectorizer_name in vectorizers:
+					vectorizer = Vectorizer(vectorizer_name, sample = Sample, size = siz, window = windo, min_count= min_coun)
+					vectorizer.build_model()
+					vectorizer.save_model()
 
 			#exit()
 
 			#print("After building model")
 
 
-			vectorizers = ['doc2vec']
 			classifiers = ['random forests']
 			#classifiers = ['random forests','bayes','svm']
 			metrics = ['fscore']
@@ -55,7 +56,8 @@ for min_coun in min_counts:
 							clf = MultinomialNB(alpha=0.5, fit_prior=True, class_prior=None)
 						elif classifier == 'MLP':
 							clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=1)
-						nc = NewsClassifier(clf, vectorizer)
+						
+						nc = NewsClassifier(clf=clf, vec=vectorizer)
 						results = nc.bootstrap_evaluate(iters = iterations, metric = metric, pct = .8)
 						#results = nc.evaluate_model()
 						print("[MinCount:"+str(min_coun)+"][Size:"+str(siz)+"][Window:"+str(windo)+"][" + classifier + "] Printing results [" + metric + "]: " + vectorizer)
